@@ -13,6 +13,11 @@
 		45B4F54B28267F05005A7EE1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B4F54928267F05005A7EE1 /* Main.storyboard */; };
 		45B4F54D28267F09005A7EE1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B4F54C28267F09005A7EE1 /* Assets.xcassets */; };
 		45B4F55028267F09005A7EE1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B4F54E28267F09005A7EE1 /* LaunchScreen.storyboard */; };
+		45B4F55A282A6001005A7EE1 /* cat_2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 45B4F558282A6001005A7EE1 /* cat_2.mov */; };
+		45B4F55B282A6001005A7EE1 /* cat_1.mov in Resources */ = {isa = PBXBuildFile; fileRef = 45B4F559282A6001005A7EE1 /* cat_1.mov */; };
+		45B4F562282A6EE4005A7EE1 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4F560282A6EE4005A7EE1 /* PlayerViewController.swift */; };
+		45B4F563282A6EE4005A7EE1 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B4F561282A6EE4005A7EE1 /* PlayerViewController.xib */; };
+		45B4F565282A7006005A7EE1 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4F564282A7006005A7EE1 /* PlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		45B4F54C28267F09005A7EE1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45B4F54F28267F09005A7EE1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45B4F55128267F09005A7EE1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		45B4F558282A6001005A7EE1 /* cat_2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = cat_2.mov; sourceTree = "<group>"; };
+		45B4F559282A6001005A7EE1 /* cat_1.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = cat_1.mov; sourceTree = "<group>"; };
+		45B4F560282A6EE4005A7EE1 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		45B4F561282A6EE4005A7EE1 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
+		45B4F564282A7006005A7EE1 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +66,7 @@
 		45B4F54228267F05005A7EE1 /* VideoPlayerSample */ = {
 			isa = PBXGroup;
 			children = (
+				45B4F5572827CDB2005A7EE1 /* Resource */,
 				45B4F54328267F05005A7EE1 /* AppDelegate.swift */,
 				45B4F54528267F05005A7EE1 /* SceneDelegate.swift */,
 				45B4F54728267F05005A7EE1 /* ViewController.swift */,
@@ -63,8 +74,20 @@
 				45B4F54C28267F09005A7EE1 /* Assets.xcassets */,
 				45B4F54E28267F09005A7EE1 /* LaunchScreen.storyboard */,
 				45B4F55128267F09005A7EE1 /* Info.plist */,
+				45B4F560282A6EE4005A7EE1 /* PlayerViewController.swift */,
+				45B4F561282A6EE4005A7EE1 /* PlayerViewController.xib */,
+				45B4F564282A7006005A7EE1 /* PlayerView.swift */,
 			);
 			path = VideoPlayerSample;
+			sourceTree = "<group>";
+		};
+		45B4F5572827CDB2005A7EE1 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				45B4F559282A6001005A7EE1 /* cat_1.mov */,
+				45B4F558282A6001005A7EE1 /* cat_2.mov */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +150,10 @@
 			files = (
 				45B4F55028267F09005A7EE1 /* LaunchScreen.storyboard in Resources */,
 				45B4F54D28267F09005A7EE1 /* Assets.xcassets in Resources */,
+				45B4F55A282A6001005A7EE1 /* cat_2.mov in Resources */,
+				45B4F55B282A6001005A7EE1 /* cat_1.mov in Resources */,
 				45B4F54B28267F05005A7EE1 /* Main.storyboard in Resources */,
+				45B4F563282A6EE4005A7EE1 /* PlayerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +165,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				45B4F54828267F05005A7EE1 /* ViewController.swift in Sources */,
+				45B4F562282A6EE4005A7EE1 /* PlayerViewController.swift in Sources */,
 				45B4F54428267F05005A7EE1 /* AppDelegate.swift in Sources */,
+				45B4F565282A7006005A7EE1 /* PlayerView.swift in Sources */,
 				45B4F54628267F05005A7EE1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

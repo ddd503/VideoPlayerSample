@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 class ViewController: UIViewController {
 
@@ -21,17 +22,27 @@ class ViewController: UIViewController {
             UIAction(title: "AVPlayerViewController実装",
                      image: UIImage(systemName: "video"),
                      handler: { _ in
-                         print("メニュー3が押されました")
+                         let player = AVPlayer(url: self.videoUrl(at: "cat_1"))
+                         let playerViewController = AVPlayerViewController()
+                         playerViewController.player = player
+                         self.present(playerViewController, animated: true) {
+                             player.play()
+                         }
                      }),
             UIAction(title: "AVPlayer実装",
                      image: UIImage(systemName: "video"),
                      handler: { _ in
-                         print("メニュー2が押されました")
+                         self.present(PlayerViewController.make(), animated: true)
                      })
         ])
+        // 違うoptionsのUIMenuをchildrenに入れて併用できるようにUIMenuの生成を分けている
         menuButton.menu = UIMenu(title: "再生方法を選択", children: [buttonMenus])
         menuButton.showsMenuAsPrimaryAction = true
     }
 
+    private func videoUrl(at name: String, type: String = "mov") -> URL {
+        let path = Bundle.main.path(forResource: name, ofType: type)
+        return URL(string: path!)!
+    }
 }
 
