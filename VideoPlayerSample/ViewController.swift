@@ -32,7 +32,7 @@ class ViewController: UIViewController {
             UIAction(title: "AVPlayer実装",
                      image: UIImage(systemName: "video"),
                      handler: { _ in
-                         self.present(PlayerViewController.make(), animated: true)
+                         self.present(PlayerViewController(videoUrl: self.videoUrl(at: "cat_2")), animated: true)
                      })
         ])
         // 違うoptionsのUIMenuをchildrenに入れて併用できるようにUIMenuの生成を分けている
@@ -41,8 +41,7 @@ class ViewController: UIViewController {
     }
 
     private func videoUrl(at name: String, type: String = "mov") -> URL {
-        let path = Bundle.main.path(forResource: name, ofType: type)
-        return URL(string: path!)!
+        return Bundle.main.url(forResource: name, withExtension: type)!
     }
 }
 
