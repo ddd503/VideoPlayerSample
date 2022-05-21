@@ -18,6 +18,7 @@
 		45B4F562282A6EE4005A7EE1 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4F560282A6EE4005A7EE1 /* PlayerViewController.swift */; };
 		45B4F563282A6EE4005A7EE1 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45B4F561282A6EE4005A7EE1 /* PlayerViewController.xib */; };
 		45B4F565282A7006005A7EE1 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4F564282A7006005A7EE1 /* PlayerView.swift */; };
+		45B4F5672838D0B9005A7EE1 /* PlayerViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B4F5662838D0B9005A7EE1 /* PlayerViewPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		45B4F560282A6EE4005A7EE1 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		45B4F561282A6EE4005A7EE1 /* PlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
 		45B4F564282A7006005A7EE1 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		45B4F5662838D0B9005A7EE1 /* PlayerViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				45B4F560282A6EE4005A7EE1 /* PlayerViewController.swift */,
 				45B4F561282A6EE4005A7EE1 /* PlayerViewController.xib */,
 				45B4F564282A7006005A7EE1 /* PlayerView.swift */,
+				45B4F5662838D0B9005A7EE1 /* PlayerViewPresenter.swift */,
 			);
 			path = VideoPlayerSample;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				45B4F562282A6EE4005A7EE1 /* PlayerViewController.swift in Sources */,
 				45B4F54428267F05005A7EE1 /* AppDelegate.swift in Sources */,
 				45B4F565282A7006005A7EE1 /* PlayerView.swift in Sources */,
+				45B4F5672838D0B9005A7EE1 /* PlayerViewPresenter.swift in Sources */,
 				45B4F54628267F05005A7EE1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

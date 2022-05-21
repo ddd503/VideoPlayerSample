@@ -32,7 +32,10 @@ class ViewController: UIViewController {
             UIAction(title: "AVPlayer実装",
                      image: UIImage(systemName: "video"),
                      handler: { _ in
-                         self.present(PlayerViewController(videoUrl: self.videoUrl(at: "cat_2")), animated: true)
+                         let presenter = PlayerViewPresenter(videoUrl: self.videoUrl(at: "cat_2"))
+                         let playerViewController = PlayerViewController(presenter: presenter)
+                         presenter.output = playerViewController
+                         self.present(playerViewController, animated: true)
                      })
         ])
         // 違うoptionsのUIMenuをchildrenに入れて併用できるようにUIMenuの生成を分けている

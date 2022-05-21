@@ -10,13 +10,11 @@ import AVFoundation
 
 final class PlayerViewController: UIViewController {
     @IBOutlet weak var playerView: PlayerView!
-    private let videoUrl: URL
-    private let avPlayer = AVPlayer()
-    private let playButtonImageTitle = "play.circle.fill"
-    private let pauseButtonImageTitle = "pause.circle.fill"
+    @IBOutlet weak var playButton: UIButton!
+    private let presenter: PlayerViewPresenter
 
-    init(videoUrl: URL) {
-        self.videoUrl = videoUrl
+    init(presenter: PlayerViewPresenter) {
+        self.presenter = presenter
         super.init(nibName: String(describing: PlayerViewController.self), bundle: .main)
     }
 
@@ -26,12 +24,20 @@ final class PlayerViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let asset = AVURLAsset(url: videoUrl)
-        self.playerView.player = avPlayer
-        avPlayer.replaceCurrentItem(with: AVPlayerItem(asset: asset))
+        presenter.viewDidLoad()
     }
 
     @IBAction func didTapPlayButton(_ sender: UIButton) {
-        avPlayer.play()
+        presenter.didTapPlayButton()
+    }
+}
+
+extension PlayerViewController: PlayViewOutput {
+    func setupPlayerView(avPlayer: AVPlayer) {
+        self.playerView.player = avPlayer
+    }
+
+    func updatePlayButtonImage(imageName: String) {
+        playButton.setBackgroundImage(UIImage(systemName: imageName), for: .normal)
     }
 }
