@@ -11,12 +11,14 @@ import AVFoundation
 protocol PlayViewOutput: AnyObject {
     func setupPlayerView(avPlayer: AVPlayer)
     func updatePlayButtonImage(imageName: String)
+    func updatePlayButtonIsEnabled(_ isEnabled: Bool)
 }
 
 final class PlayerViewPresenter {
     private let videoUrl: URL
     private let avPlayer: AVPlayer
     private var playerTimeControlStatusObserver: NSKeyValueObservation?
+    private var playerItemFastForwardObserver: NSKeyValueObservation?
     var output: PlayViewOutput?
 
     init(videoUrl: URL, avPlayer: AVPlayer = AVPlayer()) {
@@ -44,8 +46,9 @@ final class PlayerViewPresenter {
 
     private func setupPlayerObservers(_ avPlayer: AVPlayer) {
         // 再生中のプレイヤー状態を監視し、再生ボタンのイメージを切り替える
+        // .initial, .new = 登録時、都度更新後
         playerTimeControlStatusObserver = avPlayer.observe(\AVPlayer.timeControlStatus,
-                                                            options: [.initial, .new]) { [weak self] observeAvPlayer, value in
+                                                            options: [.initial, .new]) { [weak self] observeAvPlayer, _ in
             switch observeAvPlayer.timeControlStatus {
             case .paused, .waitingToPlayAtSpecifiedRate:
                 self?.output?.updatePlayButtonImage(imageName: "play.circle.fill")
@@ -54,6 +57,12 @@ final class PlayerViewPresenter {
             @unknown default:
                 self?.output?.updatePlayButtonImage(imageName: "pause.circle.fill")
             }
+        }
+
+        // 動画が再生可能かどうかを監視し、再生ボタンの活性非活性を管理
+        playerItemFastForwardObserver = avPlayer.observe(\AVPlayer.currentItem?.canPlayFastForward,
+                                                          options: [.initial, .new]) { [weak self] observeAvPlayer, _ in
+            self?.output?.updatePlayButtonIsEnabled(observeAvPlayer.currentItem?.canPlayFastForward ?? false)
         }
     }
 }

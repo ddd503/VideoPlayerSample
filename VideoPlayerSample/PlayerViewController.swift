@@ -38,6 +38,14 @@ extension PlayerViewController: PlayViewOutput {
     }
 
     func updatePlayButtonImage(imageName: String) {
-        playButton.setBackgroundImage(UIImage(systemName: imageName), for: .normal)
+        DispatchQueue.main.async { [weak self] in
+            self?.playButton.setBackgroundImage(UIImage(systemName: imageName), for: .normal)
+        }
+    }
+    
+    func updatePlayButtonIsEnabled(_ isEnabled: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.playButton.isEnabled = isEnabled
+        }
     }
 }
