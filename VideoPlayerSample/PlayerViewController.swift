@@ -11,6 +11,9 @@ import AVFoundation
 final class PlayerViewController: UIViewController {
     @IBOutlet weak var playerView: PlayerView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var forwardButton: UIButton!
+    @IBOutlet weak var backwardButton: UIButton!
+
     private let presenter: PlayerViewPresenter
 
     init(presenter: PlayerViewPresenter) {
@@ -30,6 +33,14 @@ final class PlayerViewController: UIViewController {
     @IBAction func didTapPlayButton(_ sender: UIButton) {
         presenter.didTapPlayButton()
     }
+
+    @IBAction func didTapForwardButton(_ sender: UIButton) {
+        presenter.didTapForwardButton()
+    }
+
+    @IBAction func didTapBackwardButton(_ sender: UIButton) {
+        presenter.didTapBackwardButton()
+    }
 }
 
 extension PlayerViewController: PlayViewOutput {
@@ -43,9 +54,11 @@ extension PlayerViewController: PlayViewOutput {
         }
     }
     
-    func updatePlayButtonIsEnabled(_ isEnabled: Bool) {
+    func updateActionButtonsIsEnabled(_ isEnabled: Bool) {
         DispatchQueue.main.async { [weak self] in
             self?.playButton.isEnabled = isEnabled
+            self?.forwardButton.isEnabled = isEnabled
+            self?.backwardButton.isEnabled = isEnabled
         }
     }
 }

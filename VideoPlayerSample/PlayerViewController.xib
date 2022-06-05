@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayerViewController" customModule="VideoPlayerSample" customModuleProvider="target">
             <connections>
+                <outlet property="backwardButton" destination="wGI-h8-Ep6" id="xjt-Ov-d7S"/>
+                <outlet property="forwardButton" destination="pWf-Xk-93z" id="FDC-tX-vwI"/>
                 <outlet property="playButton" destination="Drj-h0-zjZ" id="Ni0-qG-L0b"/>
                 <outlet property="playerView" destination="MdN-pg-xhc" id="ZnB-CS-P9M"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -35,11 +37,39 @@
                                 <action selector="didTapPlayButton:" destination="-1" eventType="touchUpInside" id="pdd-Cb-tEv"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGI-h8-Ep6">
+                            <rect key="frame" x="78.5" y="590.5" width="50" height="45.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="kKC-Gg-NNN"/>
+                                <constraint firstAttribute="height" constant="50" id="lRb-1C-nox"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" backgroundImage="backward.fill" catalog="system"/>
+                            <connections>
+                                <action selector="didTapBackwardButton:" destination="-1" eventType="touchUpInside" id="qfA-ah-B0a"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pWf-Xk-93z">
+                            <rect key="frame" x="285.5" y="590.5" width="50" height="45.5"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="1bc-fC-usM"/>
+                                <constraint firstAttribute="width" constant="50" id="XxN-yD-xET"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" backgroundImage="forward.fill" catalog="system"/>
+                            <connections>
+                                <action selector="didTapForwardButton:" destination="-1" eventType="touchUpInside" id="S3h-IC-q50"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
+                        <constraint firstItem="pWf-Xk-93z" firstAttribute="centerX" secondItem="MdN-pg-xhc" secondAttribute="centerX" multiplier="1.5" id="7Uc-Lm-zOD"/>
+                        <constraint firstItem="pWf-Xk-93z" firstAttribute="centerY" secondItem="MdN-pg-xhc" secondAttribute="centerY" multiplier="1.5" id="9me-TY-Wrq"/>
                         <constraint firstItem="Drj-h0-zjZ" firstAttribute="centerX" secondItem="MdN-pg-xhc" secondAttribute="centerX" id="C1t-Fp-eUN"/>
                         <constraint firstItem="Drj-h0-zjZ" firstAttribute="centerY" secondItem="MdN-pg-xhc" secondAttribute="centerY" multiplier="1.5" id="SOW-pL-CO9"/>
+                        <constraint firstItem="wGI-h8-Ep6" firstAttribute="centerY" secondItem="MdN-pg-xhc" secondAttribute="centerY" multiplier="1.5" id="YJ5-Tw-QOs"/>
+                        <constraint firstItem="wGI-h8-Ep6" firstAttribute="centerX" secondItem="MdN-pg-xhc" secondAttribute="centerX" multiplier="0.5" id="bOG-az-0Ij"/>
                     </constraints>
                 </view>
             </subviews>
@@ -55,6 +85,8 @@
         </view>
     </objects>
     <resources>
+        <image name="backward.fill" catalog="system" width="128" height="79"/>
+        <image name="forward.fill" catalog="system" width="128" height="79"/>
         <image name="play.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
