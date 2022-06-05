@@ -64,5 +64,13 @@ final class PlayerViewPresenter {
                                                           options: [.initial, .new]) { [weak self] observeAvPlayer, _ in
             self?.output?.updatePlayButtonIsEnabled(observeAvPlayer.currentItem?.canPlayFastForward ?? false)
         }
+
+        // 再生完了時、動画を最初まで戻す
+        NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
+                                               object: avPlayer.currentItem, queue: nil) { _ in
+            if let currentItem = avPlayer.currentItem, currentItem.currentTime() == currentItem.duration {
+                currentItem.seek(to: .zero, completionHandler: nil)
+            }
+        }
     }
 }
