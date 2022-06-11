@@ -17,7 +17,8 @@ protocol PlayViewOutput: AnyObject {
 final class PlayerViewPresenter {
     private let videoUrl: URL
     private let avPlayer: AVPlayer
-    private let forwardTimeOnce: Float = 10
+    private let forwardTimeOnce: Float = 2
+    private let backwardTimeOnce: Float = 2
     private var playerTimeControlStatusObserver: NSKeyValueObservation?
     private var playerItemFastForwardObserver: NSKeyValueObservation?
     var output: PlayViewOutput?
@@ -63,7 +64,19 @@ final class PlayerViewPresenter {
         }
     }
 
-    func didTapBackwardButton() {}
+    func didTapBackwardButton() {
+        let currentRate = avPlayer.rate
+        let currentTime = Float(CMTimeGetSeconds(avPlayer.currentTime()))
+        let canBackwardMax = (currentTime - backwardTimeOnce) > 0
+        // スキップ結果が0を下回る場合は始めの位置(0)までスキップする
+        let afterBackwardTime = canBackwardMax ? Double((currentTime - backwardTimeOnce)) : 0
+        avPlayer.rate = 0
+        avPlayer.seek(to: CMTime(seconds: afterBackwardTime, preferredTimescale: CMTimeScale(NSEC_PER_SEC))) { [weak self] completed in
+            if completed {
+                self?.avPlayer.rate = currentRate
+            }
+        }
+    }
 
     private func setupPlayerObservers(_ avPlayer: AVPlayer) {
         // 再生中のプレイヤー状態を監視し、再生ボタンのイメージを切り替える
