@@ -62,7 +62,7 @@
                                 <action selector="didTapForwardButton:" destination="-1" eventType="touchUpInside" id="S3h-IC-q50"/>
                             </connections>
                         </button>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="RuW-qh-120">
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="RuW-qh-120">
                             <rect key="frame" x="29" y="680.5" width="356" height="31"/>
                             <connections>
                                 <action selector="seekBarDidChange:" destination="-1" eventType="valueChanged" id="TR6-o9-yCM"/>
