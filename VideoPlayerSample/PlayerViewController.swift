@@ -13,6 +13,7 @@ final class PlayerViewController: UIViewController {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var forwardButton: UIButton!
     @IBOutlet weak var backwardButton: UIButton!
+    @IBOutlet weak var seekBar: UISlider!
 
     private let presenter: PlayerViewPresenter
 
@@ -41,6 +42,11 @@ final class PlayerViewController: UIViewController {
     @IBAction func didTapBackwardButton(_ sender: UIButton) {
         presenter.didTapBackwardButton()
     }
+
+    @IBAction func seekBarDidChange(_ sender: UISlider) {
+        presenter.seekBarDidChange(afterChangeTime: sender.value)
+    }
+
 }
 
 extension PlayerViewController: PlayViewOutput {
@@ -48,17 +54,46 @@ extension PlayerViewController: PlayViewOutput {
         self.playerView.player = avPlayer
     }
 
+    func setupSeekBar(at avPlayer: AVPlayer) {
+        seekBar.minimumValue = 0
+        let duration = avPlayer.currentItem?.duration ?? .zero
+        seekBar.maximumValue = Float(CMTimeGetSeconds(duration))
+        seekBar.value = 0
+    }
+
     func updatePlayButtonImage(imageName: String) {
         DispatchQueue.main.async { [weak self] in
             self?.playButton.setBackgroundImage(UIImage(systemName: imageName), for: .normal)
         }
     }
-    
-    func updateActionButtonsIsEnabled(_ isEnabled: Bool) {
+
+    func updatePlayButtonIsEnabled(_ isEnabled: Bool) {
         DispatchQueue.main.async { [weak self] in
             self?.playButton.isEnabled = isEnabled
+        }
+    }
+
+    func updateForwardButtonIsEnabled(_ isEnabled: Bool) {
+        DispatchQueue.main.async { [weak self] in
             self?.forwardButton.isEnabled = isEnabled
+        }
+    }
+
+    func updateBackwardButtonIsEnabled(_ isEnabled: Bool) {
+        DispatchQueue.main.async { [weak self] in
             self?.backwardButton.isEnabled = isEnabled
+        }
+    }
+
+    func updateSeekBarIsEnabled(_ isEnabled: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.seekBar.isEnabled = isEnabled
+        }
+    }
+    
+    func updateSeekBarValue(_ value: Float) {
+        DispatchQueue.main.async { [weak self] in
+            self?.seekBar.value = value
         }
     }
 }

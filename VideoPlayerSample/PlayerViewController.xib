@@ -14,6 +14,7 @@
                 <outlet property="forwardButton" destination="pWf-Xk-93z" id="FDC-tX-vwI"/>
                 <outlet property="playButton" destination="Drj-h0-zjZ" id="Ni0-qG-L0b"/>
                 <outlet property="playerView" destination="MdN-pg-xhc" id="ZnB-CS-P9M"/>
+                <outlet property="seekBar" destination="RuW-qh-120" id="QLz-OK-fXa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -61,15 +62,24 @@
                                 <action selector="didTapForwardButton:" destination="-1" eventType="touchUpInside" id="S3h-IC-q50"/>
                             </connections>
                         </button>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="0.0" maxValue="200" translatesAutoresizingMaskIntoConstraints="NO" id="RuW-qh-120">
+                            <rect key="frame" x="29" y="680.5" width="356" height="31"/>
+                            <connections>
+                                <action selector="seekBarDidChange:" destination="-1" eventType="valueChanged" id="TR6-o9-yCM"/>
+                            </connections>
+                        </slider>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="pWf-Xk-93z" firstAttribute="centerX" secondItem="MdN-pg-xhc" secondAttribute="centerX" multiplier="1.5" id="7Uc-Lm-zOD"/>
                         <constraint firstItem="pWf-Xk-93z" firstAttribute="centerY" secondItem="MdN-pg-xhc" secondAttribute="centerY" multiplier="1.5" id="9me-TY-Wrq"/>
                         <constraint firstItem="Drj-h0-zjZ" firstAttribute="centerX" secondItem="MdN-pg-xhc" secondAttribute="centerX" id="C1t-Fp-eUN"/>
+                        <constraint firstItem="RuW-qh-120" firstAttribute="width" secondItem="MdN-pg-xhc" secondAttribute="width" multiplier="0.85" id="JYM-bl-rJC"/>
+                        <constraint firstItem="RuW-qh-120" firstAttribute="centerY" secondItem="MdN-pg-xhc" secondAttribute="centerY" multiplier="1.7" id="Kw9-Qi-BBW"/>
                         <constraint firstItem="Drj-h0-zjZ" firstAttribute="centerY" secondItem="MdN-pg-xhc" secondAttribute="centerY" multiplier="1.5" id="SOW-pL-CO9"/>
                         <constraint firstItem="wGI-h8-Ep6" firstAttribute="centerY" secondItem="MdN-pg-xhc" secondAttribute="centerY" multiplier="1.5" id="YJ5-Tw-QOs"/>
                         <constraint firstItem="wGI-h8-Ep6" firstAttribute="centerX" secondItem="MdN-pg-xhc" secondAttribute="centerX" multiplier="0.5" id="bOG-az-0Ij"/>
+                        <constraint firstItem="RuW-qh-120" firstAttribute="centerX" secondItem="MdN-pg-xhc" secondAttribute="centerX" id="n4n-uO-pcK"/>
                     </constraints>
                 </view>
             </subviews>

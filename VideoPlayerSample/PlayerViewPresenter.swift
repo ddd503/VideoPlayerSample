@@ -10,8 +10,13 @@ import AVFoundation
 
 protocol PlayViewOutput: AnyObject {
     func setupPlayerView(avPlayer: AVPlayer)
+    func setupSeekBar(at avPlayer: AVPlayer)
     func updatePlayButtonImage(imageName: String)
-    func updateActionButtonsIsEnabled(_ isEnabled: Bool)
+    func updatePlayButtonIsEnabled(_ isEnabled: Bool)
+    func updateForwardButtonIsEnabled(_ isEnabled: Bool)
+    func updateBackwardButtonIsEnabled(_ isEnabled: Bool)
+    func updateSeekBarIsEnabled(_ isEnabled: Bool)
+    func updateSeekBarValue(_ value: Float)
 }
 
 final class PlayerViewPresenter {
@@ -21,6 +26,9 @@ final class PlayerViewPresenter {
     private let backwardTimeOnce: Float = 2
     private var playerTimeControlStatusObserver: NSKeyValueObservation?
     private var playerItemFastForwardObserver: NSKeyValueObservation?
+    private var playerItemReverseObserver: NSKeyValueObservation?
+    private var playerItemStatusObserver: NSKeyValueObservation?
+    private var timeObserverToken: Any?
     var output: PlayViewOutput?
 
     init(videoUrl: URL, avPlayer: AVPlayer = AVPlayer()) {
@@ -78,6 +86,11 @@ final class PlayerViewPresenter {
         }
     }
 
+    func seekBarDidChange(afterChangeTime: Float) {
+        let newTime = CMTime(seconds: Double(afterChangeTime), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        avPlayer.seek(to: newTime, toleranceBefore: .zero, toleranceAfter: .zero)
+    }
+
     private func setupPlayerObservers(_ avPlayer: AVPlayer) {
         // 再生中のプレイヤー状態を監視し、再生ボタンのイメージを切り替える
         // .initial, .new = 登録時、都度更新後
@@ -93,18 +106,50 @@ final class PlayerViewPresenter {
             }
         }
 
-        // 動画が再生可能かどうかを監視し、再生ボタンの活性非活性を管理
+        // 動画が早送り可能かを判定、早送りボタンの活性非活性を切り替える
         playerItemFastForwardObserver = avPlayer.observe(\AVPlayer.currentItem?.canPlayFastForward,
                                                           options: [.initial, .new]) { [weak self] observeAvPlayer, _ in
-            self?.output?.updateActionButtonsIsEnabled(observeAvPlayer.currentItem?.canPlayFastForward ?? false)
+            self?.output?.updateForwardButtonIsEnabled(observeAvPlayer.currentItem?.canPlayFastForward ?? false)
         }
 
-        // 再生完了時、動画を最初まで戻す
+        playerItemReverseObserver = avPlayer.observe(\AVPlayer.currentItem?.canPlayReverse,
+                                                          options: [.initial, .new]) { [weak self] observeAvPlayer, _ in
+            self?.output?.updateBackwardButtonIsEnabled(observeAvPlayer.currentItem?.canPlayReverse ?? false)
+        }
+
+        // 再生完了時、動画とシークバーを最初まで戻す
         NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                               object: avPlayer.currentItem, queue: nil) { _ in
+                                               object: avPlayer.currentItem, queue: nil) { [weak self] _ in
             if let currentItem = avPlayer.currentItem, currentItem.currentTime() == currentItem.duration {
                 currentItem.seek(to: .zero, completionHandler: nil)
+                self?.output?.updateSeekBarValue(0)
             }
+        }
+
+        playerItemStatusObserver = avPlayer.observe(\AVPlayer.currentItem?.status,
+                                                     options: [.initial, .new]) { [weak self] observeAvPlayer, _ in
+            guard let status = observeAvPlayer.currentItem?.status else {
+                return
+            }
+            switch status {
+            case .readyToPlay:
+                self?.output?.updatePlayButtonIsEnabled(true)
+                self?.output?.setupSeekBar(at: avPlayer)
+                self?.output?.updateSeekBarIsEnabled(true)
+            case .failed:
+                self?.output?.updatePlayButtonIsEnabled(false)
+                self?.output?.updateSeekBarIsEnabled(false)
+            default:
+                self?.output?.updatePlayButtonIsEnabled(false)
+                self?.output?.updateSeekBarIsEnabled(false)
+            }
+        }
+
+        let interval = CMTime(value: 1, timescale: 60) // 1秒60フレーム
+        timeObserverToken = avPlayer.addPeriodicTimeObserver(forInterval: interval,
+                                                           queue: .main) { [weak self] time in
+            let newValue = Float(time.seconds)
+            self?.output?.updateSeekBarValue(newValue)
         }
     }
 }
