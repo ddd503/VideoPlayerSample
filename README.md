@@ -6,4 +6,6 @@
 | Xcode | 13.4.1 |
 | Architecture | MVP |
 
-<img width="300" alt="movie" src="https://github.com/ddd503/Image-Resource/raw/master/videoplayer1.gif"> <img width="300" alt="movie" src="https://github.com/ddd503/Image-Resource/raw/master/videoplayer2.gif">
+https://user-images.githubusercontent.com/29952965/173271630-6bec4dcc-34f6-4ffa-bee5-30e34a73a20a.mov
+
+https://user-images.githubusercontent.com/29952965/173271737-4f275382-12f1-436f-bcf1-1a5bec93a7d7.mov
